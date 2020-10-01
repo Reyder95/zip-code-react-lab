@@ -66,9 +66,6 @@ class App extends Component {
   fetchApi(value) {
     fetch(`http://ctp-zip-api.herokuapp.com/zip/${value}`)
     .then(res => res.json())
-    .catch(err => {
-      console.log(err)
-    })
     .then(results => {
       this.setState({
         data: results
@@ -76,7 +73,10 @@ class App extends Component {
       console.log(results)
     })
     .catch(err => {
-      console.log(err)
+      console.log('hi')
+      this.setState({
+        data: []
+      })
     })  
   }
 
@@ -88,10 +88,15 @@ class App extends Component {
     if (event.target.value.length == 5) {
       this.fetchApi(event.target.value)
     }
+    else
+    {
+      this.setState({
+        data: []
+      })
+    }
   }
 
   render() {
-    
     return (
       <div className="App">
         <div className="App-header">
